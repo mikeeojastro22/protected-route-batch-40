@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Login.css';
 
+// onLogin is the state setter/function of the authentication
 function Login({ onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -8,7 +9,12 @@ function Login({ onLogin }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        if(username === 'admin' && password === 'password'){
+            onLogin(true);
+            setError('');
+        } else {
+            setError('Invalid username or password');
+        }
     };
 
     return (

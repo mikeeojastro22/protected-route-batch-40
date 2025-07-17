@@ -24,8 +24,19 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-
-
+        <Routes>
+          <Route path="/login" element={ isAuthenticated ? <Navigate to="/" replace /> : <Login onLogin={handleLogin} /> } />
+          <Route path="/" element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Navigation onLogout={handleLogout} />
+            </ProtectedRoute>
+          }>
+            <Route index element={<Home />} />
+            <Route path="bank" element={<Bank />} />
+            <Route path="budget" element={<Budget />} />  
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
       </BrowserRouter>  
     </div>
   );
